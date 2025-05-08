@@ -33,3 +33,46 @@ func GetAllUsers() ([]models.User, error) {
 	}
 	return users, nil
 }
+
+func CreateUser(user models.User) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	_, err := userCollection.InsertOne(ctx, user)
+	return err
+}
+
+func UpdateUser(id string, user models.User) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	objID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return err
+	}
+
+	filter := bson.M{"_id": objID}
+	update := bson.M{
+		"$set": bson.M{
+			"name":  user.Name,
+			"email": user.Email,
+		},
+	}
+
+	_, err = userCollection.UpdateOne(ctx, filter, update)
+	return err
+}
+
+// Fungsi delete user
+func DeleteUser(id string) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	objID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return err
+	}
+
+	_, err = userCollection.DeleteOne(ctx, bson.M{"_id": objID})
+	return err
+}
