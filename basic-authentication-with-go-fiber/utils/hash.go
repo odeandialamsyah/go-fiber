@@ -19,3 +19,9 @@ func HashPassword(password string) (string, error) {
 	return string(bytes), nil
 }
 
+// CheckPasswordHash memverifikasi apakah password sesuai dengan hash yang disimpan
+func CheckPasswordHash(password, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err == nil
+}
+
