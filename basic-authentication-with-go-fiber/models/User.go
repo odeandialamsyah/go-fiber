@@ -13,3 +13,8 @@ type User struct {
 	Role     Role               `json:"role" bson:"role"`
 }
 
+type Role struct {
+	ID   primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty"`
+	Name string             `json:"name" bson:"name"`
+}
+
