@@ -25,3 +25,15 @@ func CheckPasswordHash(password, hash string) bool {
 	return err == nil
 }
 
+// GenerateJWT membuat JWT token untuk autentikasi pengguna
+func GenerateJWT(userID string) (string, error) {
+	secretKey := os.Getenv("JWT_SECRET")
+	claims := jwt.MapClaims{
+		"sub":   userID,
+		"exp":   time.Now().Add(time.Hour * 24).Unix(),
+		"iss":   "yourapp",
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	return token.SignedString([]byte(secretKey))
+}
