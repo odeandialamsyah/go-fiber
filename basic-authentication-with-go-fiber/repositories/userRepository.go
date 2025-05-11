@@ -30,3 +30,13 @@ func CreateUser(user models.User) error {
 	}
 	return nil
 }
+
+// Fungsi untuk mendapatkan role berdasarkan ID
+func GetRoleByID(roleID string) (models.Role, error) {
+	var role models.Role
+	err := roleCollection.FindOne(context.Background(), bson.M{"_id": roleID}).Decode(&role)
+	if err != nil {
+		return models.Role{}, err
+	}
+	return role, nil
+}
