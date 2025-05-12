@@ -35,3 +35,35 @@ func RegisterUser(c *fiber.Ctx) error {
 	return c.Status(201).SendString("User registered successfully")
 }
 
+// Fungsi login user
+func LoginUser(c *fiber.Ctx) error {
+	var loginData struct {
+		Email    string `json:"email"`
+		Password string `json:"password"`
+	}
+
+	if err := c.BodyParser(&loginData); err != nil {
+		return c.Status(400).SendString(err.Error())
+	}
+
+	// Cek apakah email ada
+	user, err := repositories.GetUserByEmail(loginData.Email)
+	if err != nil {
+		return c.Status(401).SendString("Invalid credentials")
+	}
+
+	// Verifikasi password
+	if !utils.CheckPasswordHash(loginData.Password, user.Password) {
+		return c.Status(401).SendString("Invalid credentials")
+	}
+
+	// Generate JWT token
+	token, err := utils.GenerateJWT(user.ID.Hex())
+	if err != nil {
+		return c.Status(500).SendString("Failed to generate JWT")
+	}
+
+	return c.JSON(fiber.Map{
+		"token": token,
+	})
+}
