@@ -67,8 +67,3 @@ func LoginUser(c *fiber.Ctx) error {
 		"token": token,
 	})
 }
-
-// Fungsi dashboard admin (contoh protected route)
-func AdminDashboard(c *fiber.Ctx) error {
-	return c.SendString("Welcome to the admin dashboard!")
-}
