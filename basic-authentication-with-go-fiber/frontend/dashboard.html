@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="user-info">
+                <i class="fas fa-user-circle fa-3x"></i>
+                <h2 id="username"></h2>
+            </div>
+            <ul class="nav-links">
+                <!-- Admin Links -->
+                <div id="adminLinks" style="display: none;">
+                    <li class="active"><a href="#" data-section="overview"><i class="fas fa-chart-pie"></i>Overview</a></li>
+                    <li><a href="#" data-section="users"><i class="fas fa-users"></i>Users</a></li>
+                    <li><a href="#" data-section="roles"><i class="fas fa-user-tag"></i>Roles</a></li>
+                </div>
+                <!-- User Links -->
+                <div id="userLinks" style="display: none;">
+                    <li class="active"><a href="#" data-section="profile"><i class="fas fa-user"></i>Profile</a></li>
+                    <li><a href="#" data-section="settings"><i class="fas fa-cog"></i>Settings</a></li>
+                </div>
+                <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            </ul>
+        </div>
+
+        
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
