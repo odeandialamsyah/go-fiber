@@ -31,7 +31,161 @@
             </ul>
         </div>
 
-        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Admin Sections -->
+            <div id="adminSections" style="display: none;">
+                <!-- Overview Section -->
+                <section id="overview" class="dashboard-section active">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-pie"></i> Dashboard Overview</h2>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-users"></i></div>
+                            <div class="stat-info">
+                                <h3>Total Users</h3>
+                                <p id="totalUsers">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-user-check"></i></div>
+                            <div class="stat-info">
+                                <h3>Active Users</h3>
+                                <p id="activeUsers">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-user-tag"></i></div>
+                            <div class="stat-info">
+                                <h3>Total Roles</h3>
+                                <p id="totalRoles">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Users Section -->
+                <section id="users" class="dashboard-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-users"></i> User Management</h2>
+                        <button class="primary"><i class="fas fa-plus"></i> Add User</button>
+                    </div>
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search users..." id="userSearch">
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><i class="fas fa-user"></i> Username</th>
+                                    <th><i class="fas fa-envelope"></i> Email</th>
+                                    <th><i class="fas fa-user-tag"></i> Role</th>
+                                    <th><i class="fas fa-cog"></i> Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Roles Section -->
+                <section id="roles" class="dashboard-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-user-tag"></i> Role Management</h2>
+                        <button class="primary"><i class="fas fa-plus"></i> Add Role</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><i class="fas fa-tag"></i> Role Name</th>
+                                    <th><i class="fas fa-users"></i> Users Count</th>
+                                    <th><i class="fas fa-cog"></i> Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rolesTableBody"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- User Sections -->
+            <div id="userSections" style="display: none;">
+                <!-- Profile Section -->
+                <section id="profile" class="dashboard-section active">
+                    <div class="section-header">
+                        <h2><i class="fas fa-user"></i> My Profile</h2>
+                    </div>
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-circle fa-5x"></i>
+                        </div>
+                        <div class="profile-info">
+                            <div class="info-group">
+                                <i class="fas fa-user"></i>
+                                <div>
+                                    <label>Username</label>
+                                    <p id="profileUsername"></p>
+                                </div>
+                            </div>
+                            <div class="info-group">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <label>Email</label>
+                                    <p id="profileEmail"></p>
+                                </div>
+                            </div>
+                            <div class="info-group">
+                                <i class="fas fa-user-tag"></i>
+                                <div>
+                                    <label>Role</label>
+                                    <p id="profileRole"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="primary"><i class="fas fa-edit"></i> Edit Profile</button>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings" class="dashboard-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-cog"></i> Settings</h2>
+                    </div>
+                    <div class="settings-card">
+                        <div class="settings-header">
+                            <i class="fas fa-key"></i>
+                            <h3>Change Password</h3>
+                        </div>
+                        <form id="changePasswordForm" onsubmit="handleChangePassword(event)">
+                            <div class="form-group">
+                                <label for="currentPassword">
+                                    <i class="fas fa-lock"></i> Current Password
+                                </label>
+                                <input type="password" id="currentPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">
+                                    <i class="fas fa-key"></i> New Password
+                                </label>
+                                <input type="password" id="newPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">
+                                    <i class="fas fa-check-circle"></i> Confirm New Password
+                                </label>
+                                <input type="password" id="confirmPassword" required>
+                            </div>
+                            <button type="submit" class="primary">
+                                <i class="fas fa-save"></i> Update Password
+                            </button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
 
     <script src="dashboard.js"></script>
