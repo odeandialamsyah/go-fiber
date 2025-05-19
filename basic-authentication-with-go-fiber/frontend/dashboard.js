@@ -123,3 +123,10 @@ async function loadAdminData() {
         alert('Error loading dashboard data');
     }
 }
+
+// Load user dashboard data
+function loadUserData() {
+    document.getElementById('profileUsername').textContent = userData.username;
+    document.getElementById('profileEmail').textContent = userData.email;
+    document.getElementById('profileRole').textContent = userData.role;
+}
