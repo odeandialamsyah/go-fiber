@@ -43,3 +43,24 @@ function initializeDashboard() {
         });
     });
 }
+
+// Show selected section and hide others
+function showSection(sectionId) {
+    // Get the container based on user role
+    const container = userData.role === 'admin' ? 'adminSections' : 'userSections';
+    
+    // Hide all sections in the container
+    document.querySelectorAll(`#${container} .dashboard-section`).forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Show selected section
+    document.getElementById(sectionId).classList.add('active');
+
+    // Update active nav link
+    const navContainer = userData.role === 'admin' ? 'adminLinks' : 'userLinks';
+    document.querySelectorAll(`#${navContainer} li`).forEach(li => {
+        li.classList.remove('active');
+    });
+    document.querySelector(`#${navContainer} a[data-section="${sectionId}"]`).parentElement.classList.add('active');
+}
