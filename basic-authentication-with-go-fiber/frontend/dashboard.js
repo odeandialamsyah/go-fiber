@@ -130,3 +130,44 @@ function loadUserData() {
     document.getElementById('profileEmail').textContent = userData.email;
     document.getElementById('profileRole').textContent = userData.role;
 }
+
+// Handle password change
+async function handleChangePassword(event) {
+    event.preventDefault();
+    
+    const currentPassword = document.getElementById('currentPassword').value;
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (newPassword !== confirmPassword) {
+        alert('New passwords do not match');
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_URL}/protected/user/change-password`, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({
+                currentPassword,
+                newPassword
+            })
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            alert('Password changed successfully');
+            document.getElementById('changePasswordForm').reset();
+        } else {
+            alert(data.error || 'Failed to change password');
+        }
+    } catch (error) {
+        console.error('Error changing password:', error);
+        alert('Error changing password');
+    }
+}
+
+// Admin functions
+async function editUser(userId) {
+    // Implement user editing functionality
+}
