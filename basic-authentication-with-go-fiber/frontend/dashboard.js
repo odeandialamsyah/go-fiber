@@ -5,3 +5,9 @@ const token = localStorage.getItem('token');
 if (!token) {
     window.location.href = '/index.html';
 }
+
+// Get user data from localStorage
+const userData = JSON.parse(localStorage.getItem('userData'));
+if (!userData) {
+    logout();
+}
