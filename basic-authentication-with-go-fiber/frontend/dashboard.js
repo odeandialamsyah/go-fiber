@@ -197,3 +197,26 @@ async function deleteUser(userId) {
 async function editRole(roleId) {
     // Implement role editing functionality
 }
+
+async function deleteRole(roleId) {
+    if (!confirm('Are you sure you want to delete this role?')) return;
+
+    try {
+        const response = await fetch(`${API_URL}/protected/admin/roles/${roleId}`, {
+            method: 'DELETE',
+            headers
+        });
+
+        if (response.ok) {
+            loadAdminData(); // Refresh the data
+            alert('Role deleted successfully');
+        } else {
+            const data = await response.json();
+            alert(data.error || 'Failed to delete role');
+        }
+    } catch (error) {
+        console.error('Error deleting role:', error);
+        alert('Error deleting role');
+    }
+}
+
