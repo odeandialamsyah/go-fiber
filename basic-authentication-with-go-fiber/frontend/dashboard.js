@@ -220,3 +220,12 @@ async function deleteRole(roleId) {
     }
 }
 
+// Logout function
+function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userData');
+    window.location.href = '../frontend/index.html';
+}
+
+// Initialize the dashboard when the page loads
+document.addEventListener('DOMContentLoaded', initializeDashboard);
