@@ -17,3 +17,29 @@ const headers = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`
 };
+
+// Initialize dashboard based on user role
+function initializeDashboard() {
+    // Set username in sidebar
+    document.getElementById('username').textContent = userData.username;
+
+    // Show appropriate sections based on role
+    if (userData.role === 'admin') {
+        document.getElementById('adminLinks').style.display = 'block';
+        document.getElementById('adminSections').style.display = 'block';
+        loadAdminData();
+    } else {
+        document.getElementById('userLinks').style.display = 'block';
+        document.getElementById('userSections').style.display = 'block';
+        loadUserData();
+    }
+
+    // Add click handlers for navigation
+    document.querySelectorAll('.nav-links a[data-section]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const section = e.target.getAttribute('data-section');
+            showSection(section);
+        });
+    });
+}
