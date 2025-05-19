@@ -171,3 +171,29 @@ async function handleChangePassword(event) {
 async function editUser(userId) {
     // Implement user editing functionality
 }
+
+async function deleteUser(userId) {
+    if (!confirm('Are you sure you want to delete this user?')) return;
+
+    try {
+        const response = await fetch(`${API_URL}/protected/admin/users/${userId}`, {
+            method: 'DELETE',
+            headers
+        });
+
+        if (response.ok) {
+            loadAdminData(); // Refresh the data
+            alert('User deleted successfully');
+        } else {
+            const data = await response.json();
+            alert(data.error || 'Failed to delete user');
+        }
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        alert('Error deleting user');
+    }
+}
+
+async function editRole(roleId) {
+    // Implement role editing functionality
+}
