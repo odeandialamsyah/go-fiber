@@ -11,3 +11,9 @@ const userData = JSON.parse(localStorage.getItem('userData'));
 if (!userData) {
     logout();
 }
+
+// Set up headers for API requests
+const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+};
