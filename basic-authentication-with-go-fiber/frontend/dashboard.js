@@ -64,3 +64,62 @@ function showSection(sectionId) {
     });
     document.querySelector(`#${navContainer} a[data-section="${sectionId}"]`).parentElement.classList.add('active');
 }
+
+// Load admin dashboard data
+async function loadAdminData() {
+    try {
+        // Load statistics
+        const statsResponse = await fetch(`${API_URL}/protected/admin/stats`, {
+            headers
+        });
+        const stats = await statsResponse.json();
+        
+        document.getElementById('totalUsers').textContent = stats.totalUsers;
+        document.getElementById('activeUsers').textContent = stats.activeUsers;
+        document.getElementById('totalRoles').textContent = stats.totalRoles;
+
+        // Load users
+        const usersResponse = await fetch(`${API_URL}/protected/admin/users`, {
+            headers
+        });
+        const users = await usersResponse.json();
+        
+        const usersTableBody = document.getElementById('usersTableBody');
+        usersTableBody.innerHTML = users.map(user => `
+            <tr>
+                <td>${user.username}</td>
+                <td>${user.email}</td>
+                <td>${user.role.name}</td>
+                <td>
+                    <div class="action-buttons">
+                        <button onclick="editUser('${user.id}')">Edit</button>
+                        <button class="delete-button" onclick="deleteUser('${user.id}')">Delete</button>
+                    </div>
+                </td>
+            </tr>
+        `).join('');
+
+        // Load roles
+        const rolesResponse = await fetch(`${API_URL}/protected/admin/roles`, {
+            headers
+        });
+        const roles = await rolesResponse.json();
+        
+        const rolesTableBody = document.getElementById('rolesTableBody');
+        rolesTableBody.innerHTML = roles.map(role => `
+            <tr>
+                <td>${role.name}</td>
+                <td>${role.usersCount}</td>
+                <td>
+                    <div class="action-buttons">
+                        <button onclick="editRole('${role.id}')">Edit</button>
+                        <button class="delete-button" onclick="deleteRole('${role.id}')">Delete</button>
+                    </div>
+                </td>
+            </tr>
+        `).join('');
+    } catch (error) {
+        console.error('Error loading admin data:', error);
+        alert('Error loading dashboard data');
+    }
+}
