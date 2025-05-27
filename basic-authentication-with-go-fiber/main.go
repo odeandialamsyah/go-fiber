@@ -5,7 +5,6 @@ import (
 	"basic-authentication-with-go-fiber/repositories"
 	"basic-authentication-with-go-fiber/routes"
 	"basic-authentication-with-go-fiber/utils"
-	"log"
 
 	"github.com/gofiber/fiber/v2"
 )
